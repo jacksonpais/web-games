@@ -1,31 +1,52 @@
 import { useState } from "react";
 import Square from "./Square";
 
+interface WinnerData {
+  IsGameOver: boolean;
+  Winner: string;
+}
+
 const Board = () => {
   const [state, setState] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState("X");
 
-  const checkIfWinner = () => {
-    const winnerLogic = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let logic of winnerLogic) {
-      const [a, b, c] = logic;
-      if (state[a] !== null && state[a] === state[b] && state[b] === state[c]) {
-        return state[a];
+  const getGameData = () => {
+    const checkIfWinner = () => {
+      const winnerLogic = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let logic of winnerLogic) {
+        const [a, b, c] = logic;
+        if (
+          state[a] !== null &&
+          state[a] === state[b] &&
+          state[b] === state[c]
+        ) {
+          return state[a];
+        }
       }
+      return null;
+    };
+    let isGameOver = state.every((a) => a !== null);
+    let winner = null;
+    if (!isGameOver) {
+      winner = checkIfWinner();
     }
-    return false;
+    let winnerObj: WinnerData = {
+      IsGameOver: isGameOver,
+      Winner: winner,
+    };
+    return winnerObj;
   };
 
-  const isWinner = checkIfWinner();
+  const winnerData: WinnerData = getGameData();
 
   const handleClick = (index: number) => {
     if (state[index] !== null) {
@@ -45,11 +66,27 @@ const Board = () => {
 
   return (
     <>
-      {isWinner ? (
+      {winnerData.IsGameOver ? (
         <>
           <div className="w-full">
             <p className="border-2 border-yellow-600 rounded-lg p-5 text-yellow-400 text-center mx-5">
-              Winner is {isWinner}
+              Game Over! Match is draw.
+            </p>
+            <div className="text-center mt-5">
+              <button
+                className="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
+                onClick={handleResetClick}
+              >
+                Reset Game
+              </button>
+            </div>
+          </div>
+        </>
+      ) : winnerData.Winner ? (
+        <>
+          <div className="w-full">
+            <p className="border-2 border-yellow-600 rounded-lg p-5 text-yellow-400 text-center mx-5">
+              Game Over! Winner is {winnerData.Winner}
             </p>
             <div className="text-center mt-5">
               <button
