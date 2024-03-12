@@ -7,6 +7,10 @@ return (
             <a href="/tic-tac-toe" className="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
               Tic Tac Toe
             </a>
+
+            <a href="/rock-paper-scissor" className="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
+              Rock Paper Scissor
+            </a>
           </div>
         </div>
       </div>
