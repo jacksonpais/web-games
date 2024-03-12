@@ -1,11 +1,10 @@
+import Header from "../../Home/header";
 import Board from "./Board";
 
 const TicTacToe = () => {
   return (
     <div className="h-screen bg-gray-900">
-      <div className="w-full border border-white text-center p-2">
-        <h1 className="text-xl md:text-2xl lg:text-3xl text-white">Tic Tac Toe</h1>
-      </div>
+      <Header title="Tic Tac Toe"/>
       <div className="h-screen bg-gray-900 flex items-center justify-center">
         <Board />
       </div>
