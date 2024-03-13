@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Circle from "./Circle";
+import ScoreBoard from "../../Score/TwoPlayerScore/ScoreBoard";
 
-interface ScoreBoard {
+interface IScoreBoard {
   myScore: number;
   computerScore: number;
 }
@@ -17,7 +18,7 @@ const Board = () => {
     null | number
   >(null);
   const [result, setResult] = useState<null | string>(null);
-  const [score, setScore] = useState<ScoreBoard>(defaultScoreBoardProps);
+  const [score, setScore] = useState<IScoreBoard>(defaultScoreBoardProps);
 
   const getRandomNumber = (minNumber: number, maxNumber: number): number => {
     return Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
@@ -49,7 +50,7 @@ const Board = () => {
     if (resultId === "X") {
       setResult("No one");
     } else {
-      let gameScore: ScoreBoard = { ...score };
+      let gameScore: IScoreBoard = { ...score };
       gameScore.myScore =
         resultId === "1" ? (gameScore.myScore += 10) : (gameScore.myScore += 0);
       gameScore.computerScore =
@@ -72,21 +73,12 @@ const Board = () => {
     <>
       <div>
         <div className="w-full mb-10">
-          <div className="border-2 border-yellow-600 rounded-lg p-5 text-yellow-400 text-center mx-5">
-            <p>Score</p>
-            <div className="flex flex-row justify-evenly">
-              <div className="w-64 border-b-2 border-yellow-500 text-white">
-                <span className="float-start p-2 bg-yellow-500 w-28">You</span>
-                {score.myScore}
-              </div>
-              <div className="w-64 border-b-2 border-yellow-500 text-white">
-                <span className="float-end  p-2 bg-yellow-500 w-28">
-                  Computer
-                </span>
-                {score.computerScore}
-              </div>
-            </div>
-          </div>
+          <ScoreBoard
+            PlayerOneName="You"
+            PlayerOneScore={score.myScore}
+            PlayerTwoName="Computer"
+            PlayerTwoScore={score.computerScore}
+          />
         </div>
         <div className="flex flex-row">
           <Circle
@@ -108,7 +100,7 @@ const Board = () => {
         <div className="w-full mt-10">
           {selectedItemId === null && computerSelectedItemId === null ? null : (
             <>
-              <div className="border-2 border-yellow-600 rounded-lg p-5 text-yellow-400 text-center mx-5">
+              <div className="border-2 border-yellow-600 rounded-lg p-4 text-yellow-400 text-center mx-5">
                 You selected{" "}
                 <span className="font-bold text-white">
                   {getSelectedItemFromId(selectedItemId as number)}
