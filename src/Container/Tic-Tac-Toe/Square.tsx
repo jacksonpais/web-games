@@ -1,6 +1,7 @@
 interface SquareProps {
   handleClick: any;
   value: string;
+  highlight: boolean;
 }
 
 const Square = (props: SquareProps) => {
@@ -36,10 +37,12 @@ const Square = (props: SquareProps) => {
   }
   return (
     <div
-      className="w-32 h-32 m-2 border-2 border-yellow-500 text-white"
+      className={`w-20 h-20 m-2 border-2 border-yellow-500 ${
+        props.highlight ? "ring-4" : ""
+      } text-white`}
       onClick={props.handleClick}
     >
-      <div className="h-32 flex items-center justify-center">
+      <div className="h-20 flex items-center justify-center">
         <div>{turnObj}</div>
       </div>
     </div>
