@@ -1,4 +1,10 @@
-const Circle = (props: any) => {
+interface ICircleProps {
+  handleClick: any;
+  value: string;
+  selected: boolean;
+}
+
+const Circle = (props: ICircleProps) => {
   let activeClass = props.selected !== false ? "bg-yellow-500" : "";
   return (
     <div

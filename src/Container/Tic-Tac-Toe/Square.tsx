@@ -1,10 +1,10 @@
-interface SquareProps {
+interface ISquareProps {
   handleClick: any;
   value: string;
   highlight: boolean;
 }
 
-const Square = (props: SquareProps) => {
+const Square = (props: ISquareProps) => {
   let turnObj = null;
   if (props.value !== null) {
     turnObj =

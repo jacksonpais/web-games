@@ -1,10 +1,10 @@
-interface ScoreBoardProps {
+interface IScoreBoardProps {
   PlayerOneName: string;
   PlayerTwoName: string;
   PlayerOneScore: number;
   PlayerTwoScore: number;
 }
-const ScoreBoard = (props: ScoreBoardProps) => {
+const ScoreBoard = (props: IScoreBoardProps) => {
   return (
     <div className="border-2 border-yellow-600 rounded-lg p-5 text-yellow-400 text-center mx-5">
       <p>Score</p>

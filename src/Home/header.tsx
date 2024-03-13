@@ -1,7 +1,7 @@
-interface HeaderProps {
+interface IHeaderProps {
   title: string;
 }
-const Header = (props: HeaderProps) => {
+const Header = (props: IHeaderProps) => {
   return (
     <div className="w-full border border-white text-white p-3 flex items-center justify-between">
       <a

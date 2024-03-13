@@ -105,7 +105,7 @@ const Board = () => {
     setGameData(defaultGameDataProps);
   };
 
-  const highlight = (id: number) => {
+  const highlight = (id: number):boolean => {
     const [a, b, c] = gameData.WinningLogic;
     if (id === a || id === b || id === c) {
       return true;
