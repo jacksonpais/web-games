@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContextType } from "../../@types/ThemeContextType";
+
 interface ICircleProps {
   handleClick: any;
   value: string;
@@ -5,10 +9,12 @@ interface ICircleProps {
 }
 
 const Circle = (props: ICircleProps) => {
-  let activeClass = props.selected !== false ? "bg-yellow-500" : "";
+const {theme} = useContext(ThemeContext) as ThemeContextType
+
+  let activeClass = props.selected !== false ? `bg-${theme}-500` : "";
   return (
     <div
-      className={`w-48 h-48 m-2 border-4 border-yellow-500 ${activeClass} text-white rounded-full`}
+      className={`w-48 h-48 m-2 border-4 border-${theme}-600 ${activeClass} text-white rounded-full`}
       onClick={props.handleClick}
     >
       <div className="h-48 flex items-center justify-center">

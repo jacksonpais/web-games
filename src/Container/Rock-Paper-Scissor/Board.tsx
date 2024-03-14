@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Circle from "./Circle";
 import ScoreBoard from "../../Score/TwoPlayerScore/ScoreBoard";
+import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContextType } from "../../@types/ThemeContextType";
 
 interface IScoreBoard {
   myScore: number;
@@ -13,6 +15,8 @@ const defaultScoreBoardProps = {
 };
 
 const Board = () => {
+  const { theme } = useContext(ThemeContext) as ThemeContextType;
+  
   const [selectedItemId, setSelectedItemId] = useState<null | number>(null);
   const [computerSelectedItemId, setComputerSelectedItemId] = useState<
     null | number
@@ -100,7 +104,9 @@ const Board = () => {
         <div className="w-full mt-10">
           {selectedItemId === null && computerSelectedItemId === null ? null : (
             <>
-              <div className="border-2 border-yellow-600 rounded-lg p-4 text-yellow-400 text-center mx-5">
+              <div
+                className={`border-2 border-${theme}-600 rounded-lg p-4 text-${theme}-400 text-center mx-5`}
+              >
                 You selected{" "}
                 <span className="font-bold text-white">
                   {getSelectedItemFromId(selectedItemId as number)}
@@ -116,7 +122,7 @@ const Board = () => {
           {result === null ? null : (
             <div className="text-center mt-5">
               <button
-                className="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
+                className={`border-2 border-${theme}-600 rounded-lg px-3 py-2 text-${theme}-400 cursor-pointer hover:bg-${theme}-600 hover:text-${theme}-200`}
                 onClick={handleResetClick}
               >
                 Reset Game

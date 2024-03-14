@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContextType } from "../../@types/ThemeContextType";
+
 interface ISquareProps {
   handleClick: any;
   value: string;
@@ -5,6 +9,7 @@ interface ISquareProps {
 }
 
 const Square = (props: ISquareProps) => {
+  const { theme } = useContext(ThemeContext) as ThemeContextType;
   let turnObj = null;
   if (props.value !== null) {
     turnObj =
@@ -37,7 +42,7 @@ const Square = (props: ISquareProps) => {
   }
   return (
     <div
-      className={`w-20 h-20 m-2 border-2 border-yellow-500 ${
+      className={`w-20 h-20 m-2 border-2 border-${theme}-600 ${
         props.highlight ? "ring-4" : ""
       } text-white`}
       onClick={props.handleClick}

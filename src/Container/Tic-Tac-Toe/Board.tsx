@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Square from "./Square";
 import ScoreBoard from "../../Score/TwoPlayerScore/ScoreBoard";
+import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContextType } from "../../@types/ThemeContextType";
 
 interface IScoreBoard {
   myScore: number;
@@ -25,6 +27,7 @@ const defaultGameDataProps = {
 };
 
 const Board = () => {
+  const { theme } = useContext(ThemeContext) as ThemeContextType;
   const [state, setState] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState("X");
   const [score, setScore] = useState<IScoreBoard>(defaultScoreBoardProps);
@@ -105,7 +108,7 @@ const Board = () => {
     setGameData(defaultGameDataProps);
   };
 
-  const highlight = (id: number):boolean => {
+  const highlight = (id: number): boolean => {
     const [a, b, c] = gameData.WinningLogic;
     if (id === a || id === b || id === c) {
       return true;
@@ -177,31 +180,37 @@ const Board = () => {
         </div>
         <div className="w-full mt-5">
           {winnerData.IsGameOver && winnerData.Winner === null ? (
-            <div className="border-2 border-yellow-600 rounded-lg p-4 text-yellow-400 text-center mx-5">
+            <div
+              className={`border-2 border-${theme}-600 rounded-lg p-4 text-${theme}-400 text-center mx-5`}
+            >
               <span className="font-bold text-white">
                 Game Over! Match is draw.
               </span>
             </div>
           ) : winnerData.IsGameOver && winnerData.Winner ? (
-            <div className="border-2 border-yellow-600 rounded-lg p-4 text-yellow-400 text-center mx-5">
+            <div
+              className={`border-2 border-${theme}-600 rounded-lg p-4 text-${theme}-400 text-center mx-5`}
+            >
               <span className="font-bold text-white">
                 Game Over! Winner is {winnerData.Winner}
               </span>
             </div>
           ) : (
-            <div className="border-2 border-yellow-600 rounded-lg p-4 text-yellow-400 text-center mx-5">
+            <div
+              className={`border-2 border-${theme}-600 rounded-lg p-4 text-${theme}-400 text-center mx-5`}
+            >
               <span className="font-bold text-white">{turn}'s Turn</span>
             </div>
           )}
           <div className="text-center mt-5">
             <button
-              className="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
+              className={`border-2 border-${theme}-600 rounded-lg px-3 py-2 text-${theme}-400 cursor-pointer hover:bg-${theme}-600 hover:text-${theme}-200`}
               onClick={handleResetBoardClick}
             >
               Reset Board
             </button>
             <button
-              className="border-2 border-yellow-600 rounded-lg px-3 py-2 ml-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
+              className={`border-2 border-${theme}-600 rounded-lg px-3 py-2 ml-2 text-${theme}-400 cursor-pointer hover:bg-${theme}-600 hover:text-${theme}-200`}
               onClick={handleResetGameClick}
             >
               Reset Game
